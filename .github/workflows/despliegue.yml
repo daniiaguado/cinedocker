@@ -15,7 +15,11 @@ jobs:
 
       # Verificar archivos antes de la transferencia
       - name: Debug: Verificar archivos antes de la transferencia
-        run: ls -lah
+        run: |
+          echo "Contenido del directorio actual:"
+          ls -lah
+          echo "Verificando si compose.yml existe..."
+          if [ -f compose.yml ]; then echo "compose.yml encontrado"; else echo "ERROR: compose.yml NO encontrado"; exit 1; fi
 
       # Iniciar sesión en DockerHub
       - name: Log in to DockerHub
