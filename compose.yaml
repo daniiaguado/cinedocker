@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  db:
+    image: daniiaguado/mysqlcine:v1
+    container_name: contenedorMiCinee
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: contrasenyaRoot
+      MYSQL_DATABASE: cine_db
+      MYSQL_USER: cine_user
+      MYSQL_PASSWORD: cine_password
+
+  php:
+    image: daniiaguado/phpcine:v1
+    container_name: contenedorMiAppp
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: contenedorPhpMyAdminn
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: contrasenyaRoot
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
