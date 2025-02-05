@@ -39,6 +39,7 @@ echo "<td>" . htmlspecialchars($row["id"]) . "</td>";
  echo "<td>" . htmlspecialchars($row["nota"]) . "</td>";
  echo "<td>" . htmlspecialchars($row["anyo"]) . "</td>";
  echo "<td>" . htmlspecialchars($row["presupuesto"]) . "</td>";
+ echo "<td>" . htmlspecialchars($row["presupuesto"]) . "</td>";
  echo "<td><img src='data:image/jpeg;base64," . htmlspecialchars($row["img_base64"]) . "'
 alt='Imagen' width='100' height='100'></td>";
  echo "<td><a href='" . htmlspecialchars($row["url_trailer"]) . "' target='_blank'>Ver
