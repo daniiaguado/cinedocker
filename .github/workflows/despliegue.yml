@@ -13,14 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Verificar archivos antes de la transferencia
-      - name: Debug: Verificar archivos antes de la transferencia
-        run: |
-          echo "Contenido del directorio actual:"
-          ls -lah
-          echo "Verificando si compose.yml existe..."
-          if [ -f compose.yml ]; then echo "compose.yml encontrado"; else echo "ERROR: compose.yml NO encontrado"; exit 1; fi
-
       # Iniciar sesión en DockerHub
       - name: Log in to DockerHub
         uses: docker/login-action@v2
@@ -49,18 +41,8 @@ jobs:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.REMOTE_KEY }}
-          source: "compose.yml"
+          source: "./compose.yml"
           target: "~/deploy/"
-
-      # Verificar archivos en el servidor después de la transferencia
-      - name: Debug: Verificar archivos en el servidor
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          key: ${{ secrets.REMOTE_KEY }}
-          script: |
-            ls -lah ~/deploy/
 
       # Desplegar la aplicación en el servidor remoto usando docker-compose
       - name: Deploy with Docker Compose
